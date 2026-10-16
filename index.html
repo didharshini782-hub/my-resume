@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Digital Resume</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary: #8b5cf6;
+            --secondary: #ec4899;
+            --background: #f8f7ff;
+            --text: #25213b;
+            --card: #ffffff;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 8%;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 15px #00000010;
+        }
+
+        nav h2 {
+            color: var(--primary);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            margin-left: 18px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #ede9fe, #fce7f3);
+        }
+
+        .hero-content {
+            max-width: 750px;
+            animation: fadeIn 1.2s ease;
+        }
+
+        .profile {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 45px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+            border: 5px solid white;
+            box-shadow: 0 5px 25px #8b5cf644;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 52px);
+            margin-bottom: 10px;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            margin: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            color: white;
+        }
+
+        /* General Sections */
+        section {
+            padding: 70px 8%;
+            scroll-margin-top: 70px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 35px;
+        }
+
+        .section-title span {
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: auto;
+        }
+
+        .card {
+            background: var(--card);
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 5px 25px #00000008;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px #8b5cf622;
+        }
+
+        /* About */
+        .about-text {
+            text-align: center;
+            max-width: 800px;
+            margin: auto;
+            font-size: 17px;
+        }
+
+        /* Education */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 22px;
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .date {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* Skills */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .skill {
+            padding: 12px 22px;
+            background: white;
+            border: 1px solid #ddd6fe;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .skill:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Projects */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 22px;
+        }
+
+        .project-icon {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        /* Contact */
+        .contact-box {
+            max-width: 650px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .contact-box p {
+            margin: 12px 0;
+            overflow-wrap: anywhere;
+        }
+
+        .contact-box a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #25213b;
+            color: white;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 650px) {
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav a {
+                margin: 0 6px;
+                font-size: 13px;
+            }
+
+            section {
+                padding: 50px 6%;
+            }
+
+            .hero {
+                min-height: 75vh;
+            }
+        }
+
+        /* Print Resume */
+        @media print {
+            nav, .btn, footer {
+                display: none !important;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+
+            section, .hero {
+                padding: 20px;
+                min-height: auto;
+                background: white;
+            }
+
+            .card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                break-inside: avoid;
+            }
+
+            .hero-content {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <h2>MyResume ✨</h2>
+
+        <div>
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+
+            <div class="profile" id="profileInitials">PD</div>
+
+            <h1>Hello, I'm <span id="heroName">Your Name</span> 👋</h1>
+
+            <p id="heroRole">
+                Student | Aspiring Web Developer | Creative Thinker
+            </p>
+
+            <p>
+                Welcome to my digital resume! Explore my education,
+                skills, projects, and achievements.
+            </p>
+
+            <a href="#contact" class="btn">Contact Me 💌</a>
+
+            <button class="btn btn-outline" onclick="downloadResume()">
+                Download Resume 📄
+            </button>
+
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+
+            <h2 class="section-title">About <span>Me</span></h2>
+
+            <div class="about-text card">
+                <p>
+                    Hi! I'm <strong id="aboutName">Your Name</strong>,
+                    a motivated student who enjoys learning new
+                    technologies and exploring creative ideas.
+                    I am interested in web development, programming,
+                    and building useful digital projects.
+                    My goal is to improve my skills, gain practical
+                    experience, and create meaningful projects.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <div class="container">
+
+            <h2 class="section-title">My <span>Education</span> 🎓</h2>
+
+            <div class="education-grid">
+
+                <div class="card">
+                    <h3>College Education</h3>
+                    <p><strong>Degree:</strong> Your Degree Name</p>
+                    <p><strong>College:</strong> Your College Name</p>
+                    <p class="date">Year: 2026 – Present</p>
+                </div>
+
+                <div class="card">
+                    <h3>Higher Secondary</h3>
+                    <p><strong>School:</strong> Your School Name</p>
+                    <p><strong>Group:</strong> Your Group</p>
+                    <p class="date">Year: 2024 – 2026</p>
+                </div>
+
+                <div class="card">
+                    <h3>Secondary Education</h3>
+                    <p><strong>School:</strong> Your School Name</p>
+                    <p><strong>Qualification:</strong> SSLC</p>
+                    <p class="date">Enter your completion year</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+
+            <h2 class="section-title">My <span>Skills</span> 💻</h2>
+
+            <div class="skills">
+                <span class="skill">HTML</span>
+                <span class="skill">CSS</span>
+                <span class="skill">JavaScript</span>
+                <span class="skill">Python</span>
+                <span class="skill">C Programming</span>
+                <span class="skill">Communication</span>
+                <span class="skill">Creative Thinking</span>
+                <span class="skill">Problem Solving</span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+
+            <h2 class="section-title">My <span>Projects</span> 🚀</h2>
+
+            <div class="project-grid">
+
+                <div class="card">
+                    <div class="project-icon">🌐</div>
+                    <h3>Personal Portfolio</h3>
+                    <p>
+                        A personal website created using HTML and CSS
+                        to introduce myself and showcase my skills.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="project-icon">📝</div>
+                    <h3>To-Do List</h3>
+                    <p>
+                        A simple task management application built
+                        using HTML, CSS, and JavaScript.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="project-icon">🎨</div>
+                    <h3>Creative Design</h3>
+                    <p>
+                        A creative design project showcasing my
+                        imagination, design skills, and creativity.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+
+            <h2 class="section-title">Contact <span>Me</span> 📩</h2>
+
+            <div class="contact-box card">
+
+                <p>I'd love to connect and learn from others!</p>
+
+                <p>
+                    📧 Email:
+                    <a id="emailLink" href="mailto:your.email@example.com">
+                        your.email@example.com
+                    </a>
+                </p>
+
+                <p>
+                    💻 GitHub:
+                    <a id="githubLink" href="https://github.com/yourusername">
+                        github.com/yourusername
+                    </a>
+                </p>
+
+                <p>
+                    🔗 LinkedIn:
+                    <a id="linkedinLink" href="https://www.linkedin.com/">
+                        Add your LinkedIn profile
+                    </a>
+                </p>
+
+                <p>📍 Location: Your City, India</p>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            © <span id="year"></span> <span id="footerName">Your Name</span>
+            | Designed with 💜
+        </p>
+    </footer>
+
+    <script>
+        // ==================================
+        // PERSONALIZE YOUR RESUME HERE
+        // ==================================
+
+        const resume = {
+            name: "Your Name",
+            initials: "YN",
+            role: "Student | Aspiring Web Developer",
+            email: "your.email@example.com",
+            github: "https://github.com/yourusername",
+            linkedin: "https://www.linkedin.com/"
+        };
+
+        // Update personal information
+        document.getElementById("heroName").textContent = resume.name;
+        document.getElementById("aboutName").textContent = resume.name;
+        document.getElementById("footerName").textContent = resume.name;
+        document.getElementById("profileInitials").textContent = resume.initials;
+        document.getElementById("heroRole").textContent = resume.role;
+
+        // Update contact information
+        const emailLink = document.getElementById("emailLink");
+        emailLink.textContent = resume.email;
+        emailLink.href = "mailto:" + resume.email;
+
+        const githubLink = document.getElementById("githubLink");
+        githubLink.href = resume.github;
+        githubLink.textContent = resume.github.replace("https://", "");
+
+        const linkedinLink = document.getElementById("linkedinLink");
+        linkedinLink.href = resume.linkedin;
+        linkedinLink.textContent =
+            resume.linkedin === "https://www.linkedin.com/"
+            ? "Add your LinkedIn profile"
+            : resume.linkedin.replace("https://", "");
+
+        // Current year
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+
+        // Download / Print resume
+        function downloadResume() {
+            window.print();
+        }
+    </script>
+
+</body>
+</html>
